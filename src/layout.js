@@ -1,14 +1,9 @@
-export default function homePage() {
+import makeDiv from './src/helpers.js';
 
-  function makeDiv(css) {
 
-    let div = document.createElement('div');
-    div.classList.add(css);
+export default function layout() {
 
-    return div;
-  }
-
-  const container = makeDiv('home-container');
+  const container = makeDiv('container');
   const header = makeDiv('header');
   const sidebar = makeDiv('sidebar');
   const main = makeDiv('main-section');

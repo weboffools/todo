@@ -1,5 +1,11 @@
 import './style.css';
-import homePage from './home.js';
+import makeDiv from './src/helpers.js';
+import layout from './layout.js';
+import mainSection from './main.js';
 
-document.body.appendChild(homePage());
+
+document.body.appendChild(layout());
+
+
+
 
