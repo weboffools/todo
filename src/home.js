@@ -5,9 +5,7 @@ export default function homePage() {
     let div = document.createElement('div');
     div.classList.add(css);
 
-    const getDiv = () => div;
-
-    return getDiv;
+    return div;
   }
 
   const container = makeDiv('home-container');
