@@ -82,3 +82,18 @@ html {
   grid-column: 2 / 3;
   grid-row: 2 / 3;
 }
+
+.main-heading {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+}
+
+.main-heading-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.main-heading-date {
+  color: rgb(77, 77, 77);
+}
