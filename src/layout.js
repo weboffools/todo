@@ -1,4 +1,4 @@
-import makeDiv from './src/helpers.js';
+import makeDiv from './helpers.js';
 
 
 export default function layout() {

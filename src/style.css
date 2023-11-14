@@ -59,7 +59,7 @@ html {
   font-family: 'Montserrat', Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.home-container {
+.container {
   display: grid;
   height: 100vh;
   grid-template-columns: 1fr 4fr;
