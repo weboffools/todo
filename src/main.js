@@ -9,7 +9,7 @@ export default function mainSection() {
   headingDate.textContent = format(new Date(), 'MMMM dd, yyyy');
 
   headingMain.appendChild(headingTitle);
-  headingDate.appendChild(headingDate);
+  headingMain.appendChild(headingDate);
 
   return headingMain;
 }
