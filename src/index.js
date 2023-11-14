@@ -2,10 +2,15 @@ import './style.css';
 import layout from './layout.js';
 import mainSection from './main.js';
 
-const container = layout();
-container.appendChild(mainSection());
+document.body.appendChild(layout());
 
-document.body.appendChild(container);
+const sidebar = document.querySelector('.sidebar');
+const main = document.querySelector('.main-section');
+const header = document.querySelector('.header');
+
+main.appendChild(mainSection());
+
+
 
 
 
