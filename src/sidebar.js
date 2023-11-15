@@ -1,6 +1,6 @@
 import { elementClass } from './helpers.js';
 
-const makeSidebar = () => {
+function Sidebar() {
   const container = elementClass('div', 'side-container');
   const list = elementClass('ul', 'side-menu');
 
@@ -13,8 +13,8 @@ const makeSidebar = () => {
   list.appendChild(upcoming);
   list.appendChild(allTasks);
   
-  return container;
-};
+  return { container, today, upcoming, allTasks };
+}
 
-export { makeSidebar };
+export { Sidebar };
 
