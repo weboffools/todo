@@ -6,9 +6,9 @@ function Sidebar() {
   const upcoming = elementClass('li', 'upcoming-item');
   const allTasks = elementClass('li', 'all-tasks');
 
-  list.appendChild(today);
-  list.appendChild(upcoming);
-  list.appendChild(allTasks);
+  for (let item of [today, upcoming, allTasks]) {
+    list.appendChild(item);
+  }
   
   return { list, today, upcoming, allTasks };
 }
