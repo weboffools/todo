@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import elementClass from './helpers.js';
+import { elementClass } from './helpers.js';
 
 export default function mainSection() {
   const headingMain = elementClass('main-heading');
