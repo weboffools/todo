@@ -13,5 +13,5 @@ function Sidebar() {
   return { list, today, upcoming, allTasks };
 }
 
-export { Sidebar };
+export default Sidebar;
 

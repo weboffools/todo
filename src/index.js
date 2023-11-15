@@ -1,7 +1,7 @@
 import './style.css';
 import layout from './layout.js';
 import mainSection from './main.js';
-import { Sidebar } from './sidebar.js';
+import Sidebar from './sidebar.js';
 
 document.body.appendChild(layout());
 
