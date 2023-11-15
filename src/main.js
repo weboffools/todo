@@ -1,12 +1,12 @@
 import { format } from 'date-fns';
-import makeDiv from './helpers.js';
+import elementClass from './helpers.js';
 
 export default function mainSection() {
-  const headingMain = makeDiv('main-heading');
-  const headingTitle = makeDiv('main-heading-title');
+  const headingMain = elementClass('main-heading');
+  const headingTitle = elementClass('main-heading-title');
   headingTitle.textContent = 'Today';
-  const headingDate = makeDiv('main-heading-date');
-  headingDate.textContent = format(new Date(), 'MMMM dd, yyyy');
+  const headingDate = elementClass('main-heading-date');
+  headingDate.textContent = format(new Date(), 'EE, MMM io');
 
   headingMain.appendChild(headingTitle);
   headingMain.appendChild(headingDate);

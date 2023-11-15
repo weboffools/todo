@@ -1,8 +1,8 @@
-const makeDiv = (css) => {
-  const div = document.createElement('div');
-  div.classList.add(css);
+const elementClass = (element, css) => {
+  const elem = document.createElement(element);
+  elem.classList.add(css);
 
-  return div;
+  return elem;
 };
 
-export { makeDiv };
+export { elementClass };

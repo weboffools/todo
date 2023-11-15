@@ -1,12 +1,12 @@
-import makeDiv from './helpers.js';
+import elementClass from './helpers.js';
 
 
 export default function layout() {
 
-  const container = makeDiv('container');
-  const header = makeDiv('header');
-  const sidebar = makeDiv('sidebar');
-  const main = makeDiv('main-section');
+  const container = elementClass('container');
+  const header = elementClass('header');
+  const sidebar = elementClass('sidebar');
+  const main = elementClass('main-section');
 
   container.appendChild(header);
   container.appendChild(sidebar);
