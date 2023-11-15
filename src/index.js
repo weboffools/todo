@@ -22,6 +22,12 @@ upcomingMenuItem.addEventListener('click', () => {
 });
 
 
+const todayMenuItem = document.querySelector('.today-item');
+
+todayMenuItem.addEventListener('click', () => {
+  main.replaceChildren();
+  main.appendChild(Today());
+});
 
 
 
