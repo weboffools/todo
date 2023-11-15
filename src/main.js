@@ -17,20 +17,24 @@ function Today() {
 function Upcoming() {
   const container = elementClass('div', 'days-container');
 
-  let divArray = [];
-
   for (let i = 0; i < 5; i++) {
     let day = elementClass('div', `day-${i}`);
     day.classList.add('day');
     let today = new Date();
 
-    let dayHead = elementClass('div', `day-${i}-head`);
-    dayHead.textContent = format(add(today, {days: `${i}`}), 'EE, MMM, do');
+    let dayHead = elementClass('div', 'day-head');
+    let dayHeadDOW = elementClass('div', 'weekday');
+    let dayHeadMonthDay = elementClass('div', 'month-day');
+    dayHeadDOW.textContent = 
+      format(add(today, {days: `${i}`}), 'EEEE');
+    dayHeadMonthDay.textContent = 
+      format(add(today, {days: `${i}`}), 'MMM dd');
     let dayBody = elementClass('div', `day-${i}-body`);
+    dayHead.appendChild(dayHeadDOW);
+    dayHead.appendChild(dayHeadMonthDay);
     day.appendChild(dayHead);
     
     day.appendChild(dayBody);
-    divArray.push(day);
     container.appendChild(day);
   }
 

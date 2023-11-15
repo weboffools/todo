@@ -128,8 +128,7 @@ html {
 .day {
   display: grid;
   grid-template-rows: 1fr 3fr;
-  border: 2px solid #0369a1;
-  font-size: 1.25rem;
-  font-weight: 300;
+  font-size: 1rem;
+  font-weight: 600;
   padding: 20px 10px 40px 10px;
 }
