@@ -73,6 +73,7 @@ html {
 }
 
 .sidebar {
+  padding: 20px;
   background: #f0f9ff;
   grid-column: 1 / 2;
   grid-row: 2 / 3;
@@ -82,6 +83,24 @@ html {
   margin: 2vw;
   grid-column: 2 / 3;
   grid-row: 2 / 3;
+}
+
+.sidebar ul {
+  display: flex;
+  font-size: 1.25rem;
+  font-weight: 600;
+  flex-direction: column;
+  list-style: none;
+  gap: 20px;
+}
+
+.sidebar ul > li {
+  padding: 5px;
+}
+
+.sidebar ul > li:hover {
+  background: white;
+  outline: 1px solid #0369a1;
 }
 
 .main-heading {
