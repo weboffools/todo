@@ -10,7 +10,7 @@ const main = document.querySelector('.main-section');
 const header = document.querySelector('.header');
 
 main.appendChild(mainSection());
-sidebar.appendChild(Sidebar().container);
+sidebar.appendChild(Sidebar().list);
 
 
 
