@@ -6,7 +6,7 @@ export default function mainSection() {
   const headingTitle = elementClass('div', 'main-heading-title');
   headingTitle.textContent = 'Today';
   const headingDate = elementClass('div', 'main-heading-date');
-  headingDate.textContent = format(new Date(), 'EE, MMM io');
+  headingDate.textContent = format(new Date(), 'EE, MMM do');
 
   headingMain.appendChild(headingTitle);
   headingMain.appendChild(headingDate);
