@@ -1,5 +1,5 @@
 import { format, add } from 'date-fns';
-import { elementClass } from './helpers.js';
+import { elementClass, addTask } from './helpers.js';
 
 function Today() {
   const headingMain = elementClass('div', 'main-heading');
@@ -30,6 +30,7 @@ function Upcoming() {
     dayHeadMonthDay.textContent = 
       format(add(today, {days: `${i}`}), 'MMM dd');
     let dayBody = elementClass('div', `day-${i}-body`);
+    dayBody.appendChild(addTask());
     dayHead.appendChild(dayHeadDOW);
     dayHead.appendChild(dayHeadMonthDay);
     day.appendChild(dayHead);

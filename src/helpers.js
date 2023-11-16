@@ -14,10 +14,6 @@ function addTask() {
 
   text.textContent = 'Add task';
 
-  const plusImg = new Image();
-  plusImg.src = plusCircleOutline;
-  plus.appendChild(plus);
-
   div.appendChild(plus);
   div.appendChild(text);
 

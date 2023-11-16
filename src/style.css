@@ -132,3 +132,35 @@ html {
   font-weight: 600;
   padding: 20px 10px 40px 10px;
 }
+
+.add-task {
+  display: grid;
+  font-weight: initial;
+  grid-template-columns: 24px 1fr;
+  justify-items: start;
+  align-items: baseline;
+  gap: 3px;
+  padding: 10px;
+}
+
+.add-task-plus {
+  height: 24px;
+  width: 24px;
+  background-image: url('./images/plus-circle-outline.svg');
+  background-size: cover;
+}
+
+.add-task:hover { 
+  color: darkgrey;
+  outline: 1px solid darkgrey;
+  border-radius: 10px;
+}
+
+.add-task:hover > .add-task-plus {
+  background-image: url('./images/plus-circle.svg');
+}
+
+.add-task:focus > .add-task-plus {
+  background-image: url('./images/plus-circle.svg');
+}
+

@@ -27,6 +27,3 @@ todayMenuItem.addEventListener('click', () => {
   main.replaceChildren();
   main.appendChild(Today());
 });
-
-
-
