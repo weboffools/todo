@@ -164,3 +164,10 @@ html {
   background-image: url('./images/plus-circle.svg');
 }
 
+.add-task-form {
+  display: grid;
+  outline: 1px solid darkgrey;
+  padding: 10px;
+  border-radius: 10px;
+  gap: 7px;
+}
