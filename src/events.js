@@ -1,25 +1,26 @@
-import { Today, Upcoming, TaskForm } from './main.js';
+import DOM from './dom.js';
 import { storagePush } from './storage.js';
 
+const dom = DOM();
 
 function upcomingEvent() {
   const upcomingMenuItem = document.querySelector('.upcoming-item');
-  const main = document.querySelector('.main-section');
+  const main = dom.getMainElement();
 
   upcomingMenuItem.addEventListener('click', () => {
     main.replaceChildren();
-    main.appendChild(Upcoming());
+    main.appendChild(dom.upcoming());
     addTaskEvent();
   });
 }
 
 function todayEvent() {
-  const todayMenuItem = document.querySelector('.today-item');
-  const main = document.querySelector('.main-section');
 
+  const todayMenuItem = document.querySelector('.today-item');
+  const main = dom.getMainElement();
   todayMenuItem.addEventListener('click', () => {
     main.replaceChildren();
-    main.appendChild(Today());
+    main.appendChild(dom.today());
   });
 }
 
@@ -32,7 +33,8 @@ function addTaskEvent() {
       (e) => {
         const parentE = e.currentTarget.parentElement;
         parentE.replaceChildren();
-        parentE.appendChild(TaskForm());
+        parentE.appendChild(dom.taskForm());
+        submitEvent(dom.getTaskForm());
       },
       { once: true },
     );

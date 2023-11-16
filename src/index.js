@@ -1,21 +1,16 @@
 import './style.css';
-import layout from './layout.js';
-import { Today } from './main.js';
-import Sidebar from './sidebar.js';
+import DOM from './dom.js';
 import { todayEvent, upcomingEvent } from './events.js';
 
-document.body.appendChild(layout());
 
-const sidebar = document.querySelector('.sidebar');
-const main = document.querySelector('.main-section');
+document.body.appendChild(DOM().layout());
+const main = DOM().getMainElement();
+const side = DOM().getSidebarElement();
+const today = DOM().makeToday();
+const sidelist = DOM().makeSidebar().list;
 
-main.appendChild(Today());
-sidebar.appendChild(Sidebar().list);
+main.appendChild(today);
+side.appendChild(sidelist);
 
 todayEvent();
 upcomingEvent();
-
-
-
-
-
