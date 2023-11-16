@@ -20,8 +20,9 @@ function addTaskEvent() {
     task.addEventListener(
       'click',
       (e) => {
-        e.currentTarget.replaceChildren();
-        e.currentTarget.appendChild(TaskForm());
+        const parentE = e.currentTarget.parentElement;
+        parentE.replaceChildren();
+        parentE.appendChild(TaskForm());
       },
       { once: true },
     );
