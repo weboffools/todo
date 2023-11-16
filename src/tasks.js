@@ -57,8 +57,25 @@ function TaskForm() {
   form.appendChild(dueDate);
   form.appendChild(submitButton);
 
+  submitEvent(form);
 
   return form;
+}
+
+function submitEvent(form) {
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    storagePush(e);
+  });
+}
+
+function storagePush(e) {
+  let task = {
+    name: e.target.task_name.value,
+    descr: e.target.task_descr.value,
+    date: e.target.due_date.value
+  };
+  localStorage.setItem(task.name, JSON.stringify(task));
 }
 
 export { addTask, addTaskEvent, TaskForm };
