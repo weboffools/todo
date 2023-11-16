@@ -1,12 +1,14 @@
 import { v4 as uuidv4 } from 'uuid';
+import Task from './task.js';
 
 function storagePush(e) {
   const id = uuidv4();
-  let task = {
-    name: e.target.task_name.value,
-    descr: e.target.task_descr.value,
-    date: e.target.due_date.value,
-  };
+  let task = Task(
+    e.target.task_name.value,
+    e.target.task_descr.value,
+    e.target.due_date.value,
+    e.target.priority.value,
+  );
   localStorage.setItem(id, JSON.stringify(task));
 }
 
