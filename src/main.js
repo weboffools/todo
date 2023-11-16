@@ -1,5 +1,6 @@
 import { format, add } from 'date-fns';
-import { elementClass, addTask } from './helpers.js';
+import { elementClass } from './helpers.js';
+import { addTask } from './tasks.js';
 
 function Today() {
   const headingMain = elementClass('div', 'main-heading');
