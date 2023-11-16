@@ -1,4 +1,5 @@
 import { elementClass, inputID, labelFor } from './helpers.js';
+import { v4 as uuidv4 } from 'uuid';
 
 function addTask() {
   const div = elementClass('div', 'add-task');
@@ -70,12 +71,13 @@ function submitEvent(form) {
 }
 
 function storagePush(e) {
+  const id = uuidv4();
   let task = {
     name: e.target.task_name.value,
     descr: e.target.task_descr.value,
-    date: e.target.due_date.value
+    date: e.target.due_date.value,
   };
-  localStorage.setItem(task.name, JSON.stringify(task));
+  localStorage.setItem(id, JSON.stringify(task));
 }
 
 export { addTask, addTaskEvent, TaskForm };
