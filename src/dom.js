@@ -28,6 +28,7 @@ function DOM() {
   }
 
   function makeSidebar() {
+    const container = helpers.elementClass('div', 'side-container');
     const list = helpers.elementClass('ul', 'side-menu');
     const today = helpers.elementClass('li', 'today-item');
     today.textContent = 'Today';
@@ -35,13 +36,16 @@ function DOM() {
     upcoming.textContent = 'Upcoming';
     const projects = helpers.elementClass('li', 'projects');
     projects.textContent = 'Projects';
-    projects.appendChild(makeProjectList());
 
     for (let item of [today, upcoming, projects]) {
       list.appendChild(item);
     }
+    container.appendChild(list);
+    container.appendChild(makeProjectList());
+    container.appendChild(addProject());
 
-    return list;
+    return container;
+
   }
 
   function makeProjectList() {
@@ -112,6 +116,19 @@ function DOM() {
     const plus = helpers.elementClass('div', 'add-task-plus');
 
     text.textContent = 'Add task';
+
+    div.appendChild(plus);
+    div.appendChild(text);
+
+    return div;
+  }
+
+  function addProject() {
+    const div = helpers.elementClass('div', 'add-project');
+    const text = helpers.elementClass('div', 'add-project-text');
+    const plus = helpers.elementClass('div', 'add-project-plus');
+
+    text.textContent = 'Add Project';
 
     div.appendChild(plus);
     div.appendChild(text);

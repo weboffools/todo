@@ -132,7 +132,7 @@ html {
   font-weight: 600;
 }
 
-.add-task {
+.add-task, .add-project{
   display: grid;
   font-weight: initial;
   grid-template-columns: 24px 1fr;
@@ -142,24 +142,20 @@ html {
   padding: 10px;
 }
 
-.add-task-plus {
+.add-task-plus, .add-project-plus{
   height: 24px;
   width: 24px;
   background-image: url('./images/plus-circle-outline.svg');
   background-size: cover;
 }
 
-.add-task:hover { 
+.add-task:hover, .add-project:hover { 
   color: darkgrey;
   outline: 1px solid darkgrey;
   border-radius: 10px;
 }
 
-.add-task:hover > .add-task-plus {
-  background-image: url('./images/plus-circle.svg');
-}
-
-.add-task:focus > .add-task-plus {
+.add-task:hover > .add-task-plus, .add-project:hover > .add-project-plus {
   background-image: url('./images/plus-circle.svg');
 }
 
@@ -183,6 +179,10 @@ legend {
 .form-radio {
   display: flex;
   justify-content: space-between;
+}
+
+.project-list {
+  padding-left: 30px;
 }
 
 .project-list-item div {
