@@ -13,25 +13,18 @@ function ManageStorage() {
     }
   }
 
-  function addToStore(key) {
-    if (localStorage.getItem(key)) {
-      console.log('Key exists');
-    }
-  }
-
-
-  function storagePush(task, project) {
-    localStorage.setItem(project.id, JSON.stringify(task));
+  function addToStore(item) {
+    localStorage.setItem(item.fullKey, JSON.stringify(item));
   }
 
   function storageLookup(searchString, type) {
     let map = getStore()
       .map((entry) => JSON.parse(entry[1]))
       .filter((obj) => obj[type] === searchString);
-    console.log(map);
+    return map;
   }
 
-  return { initStore, addToStore, storagePush, storageLookup, getStore };
+  return { initStore, addToStore, storageLookup, getStore };
 }
 
 export default ManageStorage;
