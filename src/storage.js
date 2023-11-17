@@ -1,7 +1,6 @@
 import Project from './project.js';
 
 function ManageStorage() {
-  
   const currentStore = Object.entries(localStorage);
 
   const getStore = () => currentStore;
@@ -9,10 +8,17 @@ function ManageStorage() {
   function initStore() {
     if (localStorage.length === 0) {
       let defaultStore = Project('Home');
-      
-      localStorage.setItem('projects', JSON.stringify(defaultStore)); 
+
+      localStorage.setItem('Home', JSON.stringify(defaultStore));
     }
   }
+
+  function addToStore(key) {
+    if (localStorage.getItem(key)) {
+      console.log('Key exists');
+    }
+  }
+
 
   function storagePush(task, project) {
     localStorage.setItem(project.id, JSON.stringify(task));
@@ -25,7 +31,7 @@ function ManageStorage() {
     console.log(map);
   }
 
-  return { initStore, storagePush, storageLookup, getStore };
+  return { initStore, addToStore, storagePush, storageLookup, getStore };
 }
 
 export default ManageStorage;

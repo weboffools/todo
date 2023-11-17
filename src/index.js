@@ -16,3 +16,5 @@ side.appendChild(sidelist);
 todayEvent();
 upcomingEvent();
 ManageStorage().initStore();
+ManageStorage().addToStore('Home');
+
