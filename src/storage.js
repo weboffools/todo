@@ -1,4 +1,5 @@
 import Project from './project.js';
+import Task from './task.js';
 
 function ManageStorage() {
   const currentStore = Object.entries(localStorage);
@@ -7,9 +8,8 @@ function ManageStorage() {
 
   function initStore() {
     if (localStorage.length === 0) {
-      let defaultStore = Project('Home');
-
-      localStorage.setItem('Home', JSON.stringify(defaultStore));
+      let defaultStore = new Project('Home');
+      localStorage.setItem(defaultStore.fullKey, JSON.stringify(defaultStore));
     }
   }
 
