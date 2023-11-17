@@ -84,13 +84,17 @@ html {
   grid-row: 2 / 3;
 }
 
+.side-container {
+  display: grid;
+  align-items: start;
+}
+
 .sidebar ul {
   display: flex;
   font-size: 1.25rem;
   font-weight: 600;
   flex-direction: column;
   list-style: none;
-  width: 100%;
 }
 
 .sidebar ul > li {
@@ -181,7 +185,12 @@ legend {
   justify-content: space-between;
 }
 
+input, textarea {
+  font-family: inherit;
+}
+
 .project-list {
+  align-self: center;
   padding-left: 30px;
 }
 
