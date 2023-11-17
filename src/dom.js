@@ -33,14 +33,14 @@ function DOM() {
     today.textContent = 'Today';
     const upcoming = helpers.elementClass('li', 'upcoming-item');
     upcoming.textContent = 'Upcoming';
-    const allTasks = helpers.elementClass('li', 'all-tasks');
-    allTasks.textContent = 'All Tasks';
+    const projects = helpers.elementClass('li', 'all-tasks');
+    projects.textContent = 'Projects';
 
-    for (let item of [today, upcoming, allTasks]) {
+    for (let item of [today, upcoming, projects]) {
       list.appendChild(item);
     }
 
-    return { list, today, upcoming, allTasks };
+    return list;
   }
 
   function makeToday() {
