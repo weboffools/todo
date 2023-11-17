@@ -1,9 +1,8 @@
 import './style.css';
 import DOM from './dom.js';
-import { todayEvent, upcomingEvent } from './events.js';
+import { todayEvent, upcomingEvent, addProjectEvent } from './events.js';
 import ManageStorage from './storage';
-import Task from './task';
-import Project from './project';
+
 
 document.body.appendChild(DOM().layout());
 const main = DOM().getMainElement();
@@ -16,4 +15,5 @@ side.appendChild(sidelist);
 
 todayEvent();
 upcomingEvent();
+addProjectEvent();
 ManageStorage().initStore();

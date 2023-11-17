@@ -40,6 +40,23 @@ function addTaskEvent() {
   });
 }
 
+function addProjectEvent() {
+  const projects = document.querySelectorAll('.add-project');
+
+  projects.forEach((project) => {
+    project.addEventListener(
+      'click',
+      (e) => {
+        const parentE = e.currentTarget.parentElement;
+        parentE.replaceChildren();
+        parentE.appendChild(DOM().projectForm());
+        submitEvent(DOM().getProjectForm());
+      },
+      { once: true },
+    );
+  });
+}
+
 function submitEvent(form) {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -53,4 +70,4 @@ function submitEvent(form) {
   });
 }
 
-export { upcomingEvent, submitEvent, todayEvent };
+export { upcomingEvent, submitEvent, todayEvent, addProjectEvent };
