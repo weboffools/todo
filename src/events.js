@@ -15,7 +15,6 @@ function upcomingEvent() {
 }
 
 function todayEvent() {
-
   const todayMenuItem = document.querySelector('.today-item');
   const main = DOM().getMainElement();
   todayMenuItem.addEventListener('click', () => {
@@ -44,13 +43,13 @@ function addTaskEvent() {
 function submitEvent(form) {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const name = e.target.task_name.value;
-    const descr = e.target.task_descr.value;
-    const due = e.target.due_date.value;
-    const priority = e.target.priority.value;
-    const project = e.target.project.value;
-
-    ManageStorage().storagePush(Task(name, descr, due, priority), project);
+    const task = new Task(
+      e.target.task_name.value,
+      e.target.task_descr.value,
+      e.target.due_date.value,
+      e.target.priority.value,
+      e.target.project.value);
+    ManageStorage().addToStore(task);
   });
 }
 
