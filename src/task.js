@@ -1,13 +1,22 @@
-function Task(name, description, dueDate, priority, project ) {
-  let obj = {
-    name: name,
-    description: description,
-    due: dueDate,
-    priority: priority,
-    project: project
-  };
+import { v4 as uuidv4 } from 'uuid';
 
-  return obj;
+class Task {
+  _id = uuidv4().slice(24);
+
+  constructor(name, descr, date, priority, project) {
+    this.name = name;
+    this.description = descr;
+    this.date = date;
+    this.priority = priority;
+    this.project = project;
+  }
+
+  get fullKey() {
+    return `${this.name}_${this._id}`;
+  }
+
 }
 
 export default Task;
+
+  
