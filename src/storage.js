@@ -8,7 +8,7 @@ function ManageStorage() {
 
   function initStore() {
     if (localStorage.length === 0) {
-      let defaultStore = Project('Home', new Date());
+      let defaultStore = Project('Home');
       
       localStorage.setItem('projects', JSON.stringify(defaultStore)); 
     }
