@@ -1,5 +1,7 @@
 import DOM from './dom.js';
 import { storagePush } from './storage.js';
+import Task from './task.js';
+import Project from './project.js';
 
 function upcomingEvent() {
   const upcomingMenuItem = document.querySelector('.upcoming-item');
@@ -42,7 +44,13 @@ function addTaskEvent() {
 function submitEvent(form) {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    storagePush(e);
+    const name = e.target.task_name.value;
+    const descr = e.target.task_descr.value;
+    const due = e.target.due_date.value;
+    const priority = e.target.priority.value;
+    const project = e.target.project.value;
+
+    storagePush(Task(name, descr, due, priority), project);
   });
 }
 
