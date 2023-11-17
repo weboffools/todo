@@ -24,7 +24,14 @@ function ManageStorage() {
     return map;
   }
 
-  return { initStore, addToStore, storageLookup, getStore };
+  function getProjects() {
+    let projects = getStore()
+      .map((entry) => JSON.parse(entry[1]))
+      .filter((obj) => obj['type'] === 'project');
+    return projects;
+  }
+
+  return { initStore, addToStore, storageLookup, getStore, getProjects };
 }
 
 export default ManageStorage;

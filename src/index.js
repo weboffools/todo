@@ -17,10 +17,3 @@ side.appendChild(sidelist);
 todayEvent();
 upcomingEvent();
 ManageStorage().initStore();
-
-let lookup = ManageStorage().storageLookup('Home', 'name');
-
-console.log(typeof(lookup));
-for (let item of lookup) {
-  console.log(item.name);
-}

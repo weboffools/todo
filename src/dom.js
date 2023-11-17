@@ -33,13 +33,34 @@ function DOM() {
     today.textContent = 'Today';
     const upcoming = helpers.elementClass('li', 'upcoming-item');
     upcoming.textContent = 'Upcoming';
-    const projects = helpers.elementClass('li', 'all-tasks');
+    const projects = helpers.elementClass('li', 'projects');
     projects.textContent = 'Projects';
+    projects.appendChild(makeProjectList());
 
     for (let item of [today, upcoming, projects]) {
       list.appendChild(item);
     }
 
+    return list;
+  }
+
+  function makeProjectList() {
+    const list = helpers.elementClass('ul', 'project-list');
+    const projects = ManageStorage().getProjects();
+    
+    for (let item of projects) {
+      const li = helpers.elementClass('li', 'project-list-item');
+      const div = document.createElement('div');
+      const name = document.createElement('span');
+      name.textContent = item.name;
+      const number = helpers.elementClass('span', 'number');
+      number.textContent = item.tasks.length;
+      div.appendChild(name);
+      div.appendChild(number);
+      li.appendChild(div);
+      list.appendChild(li);
+    }
+    
     return list;
   }
 
