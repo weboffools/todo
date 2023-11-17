@@ -1,5 +1,5 @@
 import DOM from './dom.js';
-import { storagePush } from './storage.js';
+import ManageStorage from './storage.js';
 import Task from './task.js';
 import Project from './project.js';
 
@@ -20,7 +20,7 @@ function todayEvent() {
   const main = DOM().getMainElement();
   todayMenuItem.addEventListener('click', () => {
     main.replaceChildren();
-    main.appendChild(DOM().today());
+    main.appendChild(DOM().makeToday());
   });
 }
 
@@ -50,7 +50,7 @@ function submitEvent(form) {
     const priority = e.target.priority.value;
     const project = e.target.project.value;
 
-    storagePush(Task(name, descr, due, priority), project);
+    ManageStorage().storagePush(Task(name, descr, due, priority), project);
   });
 }
 
