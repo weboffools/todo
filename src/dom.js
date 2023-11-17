@@ -114,6 +114,8 @@ function DOM() {
     const dueDate = helpers.inputID('due_date', 'date', 'due_date');
     const priorityLabel = helpers.labelFor('priority', 'Priority');
     const priority = helpers.inputID('priority', 'radio', 'priority');
+    const projectLabel = helpers.labelFor('project', 'Project');
+    const project = helpers.inputID('project', 'select', 'project');
 
     const submitButton = document.createElement('button');
     submitButton.setAttribute('type', 'submit');
@@ -127,7 +129,10 @@ function DOM() {
     form.appendChild(dueDate);
     form.appendChild(priorityLabel);
     form.appendChild(priority);
+    form.appendChild(projectLabel);
+    form.appendChild(project);
     form.appendChild(submitButton);
+    
 
     return form;
   }
