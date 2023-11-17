@@ -13,12 +13,13 @@ function ManageStorage() {
     }
   }
 
-  function addToStore(key) {
+  function addToStore(key, value) {
     if (localStorage.getItem(key)) {
       console.log('Key exists');
+    } else {
+      localStorage.setItem(key, value);
     }
   }
-
 
   function storagePush(task, project) {
     localStorage.setItem(project.id, JSON.stringify(task));
