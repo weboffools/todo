@@ -1,4 +1,5 @@
 import { format, add } from 'date-fns';
+import ManageStorage from './storage';
 
 function DOM() {
   const sidebar = document.querySelector('.sidebar');
@@ -112,10 +113,53 @@ function DOM() {
 
     const dueDateLabel = helpers.labelFor('due_date', 'Due Date');
     const dueDate = helpers.inputID('due_date', 'date', 'due_date');
-    const priorityLabel = helpers.labelFor('priority', 'Priority');
-    const priority = helpers.inputID('priority', 'radio', 'priority');
-    const projectLabel = helpers.labelFor('project', 'Project');
-    const project = helpers.inputID('project', 'select', 'project');
+
+    const priorityField = helpers.elementClass('fieldset', 'priority_fieldset');
+    const priorityLegend = helpers.elementClass('legend', 'priority_legend');
+    priorityLegend.textContent = 'Priority';
+    priorityField.appendChild(priorityLegend);
+
+    const high = helpers.elementClass('div', 'form-radio');
+    const medium = helpers.elementClass('div', 'form-radio');
+    const low = helpers.elementClass('div', 'form-radio');
+
+    const highLabel = helpers.labelFor('high', 'High');
+    const highInput = helpers.inputID('high', 'radio', 'priority');
+    highInput.setAttribute('value', 'high');
+    high.appendChild(highLabel);
+    high.appendChild(highInput);
+
+    const medLabel = helpers.labelFor('medium', 'Medium');
+    const medInput = helpers.inputID('medium', 'radio', 'priority');
+    medInput.setAttribute('value', 'medium');
+    medium.appendChild(medLabel);
+    medium.appendChild(medInput);
+
+    const lowLabel = helpers.labelFor('low', 'Low');
+    const lowInput = helpers.inputID('low', 'radio', 'priority');
+    lowInput.setAttribute('value', 'low');
+    low.appendChild(lowLabel);
+    low.appendChild(lowInput);
+
+    priorityField.appendChild(high);
+    priorityField.appendChild(medium);
+    priorityField.appendChild(low);
+
+    const projectLabel = helpers.labelFor('project', 'Select a Project');
+    const projectSelect = document.createElement('select');
+    projectSelect.setAttribute('name', 'project');
+    projectSelect.setAttribute('id', 'project-select');
+    const defaultOption = document.createElement('option');
+    defaultOption.setAttribute('value', '');
+    defaultOption.textContent = '--Choose a Project--';
+    projectSelect.appendChild(defaultOption);
+    let projectArray = ManageStorage().storageLookup('project', 'type');
+    for (let item of projectArray) {
+      const name = item.name.toLowerCase();
+      const project = helpers.optionValue(`${name}`);
+      project.textContent = item.name;
+      projectSelect.appendChild(project);
+    }
 
     const submitButton = document.createElement('button');
     submitButton.setAttribute('type', 'submit');
@@ -127,12 +171,10 @@ function DOM() {
     form.appendChild(taskDescr);
     form.appendChild(dueDateLabel);
     form.appendChild(dueDate);
-    form.appendChild(priorityLabel);
-    form.appendChild(priority);
+    form.appendChild(priorityField);
     form.appendChild(projectLabel);
-    form.appendChild(project);
+    form.appendChild(projectSelect);
     form.appendChild(submitButton);
-    
 
     return form;
   }
@@ -176,7 +218,14 @@ function Helpers() {
     return label;
   };
 
-  return { elementClass, inputID, labelFor };
+  const optionValue = (value) => {
+    const option = document.createElement('option');
+    option.setAttribute('value', value);
+
+    return option;
+  };
+
+  return { elementClass, inputID, labelFor, optionValue };
 }
 
 export default DOM;

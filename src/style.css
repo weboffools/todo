@@ -168,5 +168,20 @@ html {
   outline: 1px solid darkgrey;
   padding: 10px;
   border-radius: 10px;
-  gap: 7px;
+  gap: 12px;
 }
+
+.add-task-form fieldset {
+  display: grid;
+  padding: 15px 25px;
+}
+
+legend {
+  text-align: center;
+}
+
+.form-radio {
+  display: flex;
+  justify-content: space-between;
+}
+

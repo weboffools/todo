@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 class Project {
   _id = uuidv4().slice(24);
   tasks = [];
+  type = 'project';
 
   constructor(name) {
     this.name = name;
