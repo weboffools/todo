@@ -1,6 +1,7 @@
 import './style.css';
 import DOM from './dom.js';
 import { todayEvent, upcomingEvent } from './events.js';
+import ManageStorage from './storage';
 
 
 document.body.appendChild(DOM().layout());
@@ -14,3 +15,4 @@ side.appendChild(sidelist);
 
 todayEvent();
 upcomingEvent();
+ManageStorage().initStore();

@@ -7,8 +7,10 @@ function ManageStorage() {
   const getStore = () => currentStore;
 
   function initStore() {
-    if (!localStorage) {
-      localStorage.setItem('projects', Project('Home'));
+    if (localStorage.length === 0) {
+      let defaultStore = Project('Home', new Date());
+      
+      localStorage.setItem('projects', JSON.stringify(defaultStore)); 
     }
   }
 
