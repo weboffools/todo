@@ -31,11 +31,23 @@ function addTaskEvent() {
       'click',
       (e) => {
         const parentE = e.currentTarget.parentElement;
-        parentE.replaceChildren();
-        parentE.appendChild(DOM().taskForm());
-        submitEvent(DOM().getTaskForm());
-      },
-      { once: true },
+        if (document.querySelector('.add-task-form') === null) {
+          parentE.replaceChildren();
+          parentE.appendChild(DOM().taskForm());
+
+          let form = DOM().getTaskForm();
+          form.firstChild.focus();
+          submitEvent(form);
+        } else {
+          let form = document.querySelector('.add-task-form');
+          form.replaceWith(DOM().addTask());
+          parentE.replaceChildren();
+          parentE.appendChild(DOM().taskForm());
+          form = DOM().getTaskForm();
+          form.firstChild.focus();
+          submitEvent(form);
+        }
+      }
     );
   });
 }
@@ -58,23 +70,23 @@ function addProjectEvent() {
 function submitEvent(form) {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    
+
     const task = new Task(
       e.target.task_name.value,
       e.target.task_descr.value,
       e.target.due_date.value,
       e.target.priority.value,
-      e.target.project.value);
+      e.target.project.value,
+    );
     ManageStorage().addToStore(task);
+    e.target.replaceWith(DOM().addTask());
   });
 }
 
 function newProjectEvent(form) {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const project = new Project(
-      e.target.project_name.value,
-    );
+    const project = new Project(e.target.project_name.value);
     ManageStorage().addToStore(project);
   });
 }

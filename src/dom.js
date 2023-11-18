@@ -204,7 +204,7 @@ function DOM() {
 
     const submitButton = document.createElement('button');
     submitButton.setAttribute('type', 'submit');
-    submitButton.textContent = 'Submit';
+    submitButton.textContent = 'Add Task';
 
     form.appendChild(taskNameLabel);
     form.appendChild(taskName);
