@@ -47,10 +47,9 @@ function addProjectEvent() {
     project.addEventListener(
       'click',
       (e) => {
-        const parentE = e.currentTarget.parentElement;
-        parentE.replaceChildren();
-        parentE.appendChild(DOM().projectForm());
-        submitEvent(DOM().getProjectForm());
+        e.currentTarget.replaceChildren();
+        e.currentTarget.appendChild(DOM().projectForm());
+        newProjectEvent(DOM().getProjectForm());
       },
       { once: true },
     );
@@ -67,6 +66,16 @@ function submitEvent(form) {
       e.target.priority.value,
       e.target.project.value);
     ManageStorage().addToStore(task);
+  });
+}
+
+function newProjectEvent(form) {
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const project = new Project(
+      e.target.project_name.value,
+    );
+    ManageStorage().addToStore(project);
   });
 }
 
