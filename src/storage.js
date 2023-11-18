@@ -1,4 +1,5 @@
 import Project from './project.js';
+import Task from './task.js';
 
 function ManageStorage() {
   const currentStore = Object.entries(localStorage);
@@ -7,32 +8,30 @@ function ManageStorage() {
 
   function initStore() {
     if (localStorage.length === 0) {
-      let defaultStore = Project('Home');
-
-      localStorage.setItem('Home', JSON.stringify(defaultStore));
+      let defaultStore = new Project('Home');
+      localStorage.setItem(defaultStore.fullKey, JSON.stringify(defaultStore));
     }
   }
 
-  function addToStore(key, value) {
-    if (localStorage.getItem(key)) {
-      console.log('Key exists');
-    } else {
-      localStorage.setItem(key, value);
-    }
-  }
-
-  function storagePush(task, project) {
-    localStorage.setItem(project.id, JSON.stringify(task));
+  function addToStore(item) {
+    localStorage.setItem(item.fullKey, JSON.stringify(item));
   }
 
   function storageLookup(searchString, type) {
     let map = getStore()
       .map((entry) => JSON.parse(entry[1]))
       .filter((obj) => obj[type] === searchString);
-    console.log(map);
+    return map;
   }
 
-  return { initStore, addToStore, storagePush, storageLookup, getStore };
+  function getProjects() {
+    let projects = getStore()
+      .map((entry) => JSON.parse(entry[1]))
+      .filter((obj) => obj['type'] === 'project');
+    return projects;
+  }
+
+  return { initStore, addToStore, storageLookup, getStore, getProjects };
 }
 
 export default ManageStorage;

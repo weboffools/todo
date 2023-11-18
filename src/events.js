@@ -15,7 +15,6 @@ function upcomingEvent() {
 }
 
 function todayEvent() {
-
   const todayMenuItem = document.querySelector('.today-item');
   const main = DOM().getMainElement();
   todayMenuItem.addEventListener('click', () => {
@@ -31,10 +30,35 @@ function addTaskEvent() {
     task.addEventListener(
       'click',
       (e) => {
-        const parentE = e.currentTarget.parentElement;
-        parentE.replaceChildren();
-        parentE.appendChild(DOM().taskForm());
-        submitEvent(DOM().getTaskForm());
+        const current = e.currentTarget;
+        let form = document.querySelector('.add-task-form');
+        if (form === null) {
+          current.replaceWith(DOM().taskForm());
+          let form = DOM().getTaskForm();
+          form.firstChild.focus();
+          submitEvent(form);
+        } else {
+          form.replaceWith(DOM().addTask());
+          current.replaceWith(DOM().taskForm());
+          form = DOM().getTaskForm();
+          form.firstChild.focus();
+          submitEvent(form);
+
+        }
+      }
+    );
+  });
+}
+
+function addProjectEvent() {
+  const projects = document.querySelectorAll('.add-project');
+
+  projects.forEach((project) => {
+    project.addEventListener(
+      'click',
+      (e) => {
+        e.currentTarget.replaceWith(DOM().projectForm());
+        newProjectEvent(DOM().getProjectForm());
       },
       { once: true },
     );
@@ -44,14 +68,25 @@ function addTaskEvent() {
 function submitEvent(form) {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const name = e.target.task_name.value;
-    const descr = e.target.task_descr.value;
-    const due = e.target.due_date.value;
-    const priority = e.target.priority.value;
-    const project = e.target.project.value;
 
-    ManageStorage().storagePush(Task(name, descr, due, priority), project);
+    const task = new Task(
+      e.target.task_name.value,
+      e.target.task_descr.value,
+      e.target.due_date.value,
+      e.target.priority.value,
+      e.target.project.value,
+    );
+    ManageStorage().addToStore(task);
+    e.target.replaceWith(DOM().addTask());
   });
 }
 
-export { upcomingEvent, submitEvent, todayEvent };
+function newProjectEvent(form) {
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const project = new Project(e.target.project_name.value);
+    ManageStorage().addToStore(project);
+  });
+}
+
+export { upcomingEvent, submitEvent, todayEvent, addProjectEvent };

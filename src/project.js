@@ -1,13 +1,22 @@
 import { v4 as uuidv4 } from 'uuid';
 
-function Project(name) {
-  let obj = {
-    _id: uuidv4(),
-    name: name,
-    tasks: [],
-  };
+class Project {
+  _id = uuidv4().slice(24);
+  tasks = [];
+  type = 'project';
 
-  return obj;
+  constructor(name) {
+    this.name = name;
+  }
+
+  get fullKey() {
+    return `${this.name}_${this._id}`;
+  }
+
+  addTask(task) {
+    this.tasks.push(task);
+  }
+
 }
 
 export default Project;
