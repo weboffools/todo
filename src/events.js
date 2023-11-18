@@ -30,22 +30,20 @@ function addTaskEvent() {
     task.addEventListener(
       'click',
       (e) => {
-        const parentE = e.currentTarget.parentElement;
-        if (document.querySelector('.add-task-form') === null) {
-          parentE.replaceChildren();
-          parentE.appendChild(DOM().taskForm());
-
+        const current = e.currentTarget;
+        let form = document.querySelector('.add-task-form');
+        if (form === null) {
+          current.replaceWith(DOM().taskForm());
           let form = DOM().getTaskForm();
           form.firstChild.focus();
           submitEvent(form);
         } else {
-          let form = document.querySelector('.add-task-form');
           form.replaceWith(DOM().addTask());
-          parentE.replaceChildren();
-          parentE.appendChild(DOM().taskForm());
+          current.replaceWith(DOM().taskForm());
           form = DOM().getTaskForm();
           form.firstChild.focus();
           submitEvent(form);
+
         }
       }
     );
