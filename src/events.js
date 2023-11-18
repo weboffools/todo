@@ -47,8 +47,7 @@ function addProjectEvent() {
     project.addEventListener(
       'click',
       (e) => {
-        e.currentTarget.replaceChildren();
-        e.currentTarget.appendChild(DOM().projectForm());
+        e.currentTarget.replaceWith(DOM().projectForm());
         newProjectEvent(DOM().getProjectForm());
       },
       { once: true },

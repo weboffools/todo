@@ -126,7 +126,6 @@ html {
   grid-template-columns: repeat(5, 1fr);
   gap: 5px;
   height: 100vh;
-
 }
 
 .day {
@@ -136,7 +135,8 @@ html {
   font-weight: 600;
 }
 
-.add-task, .add-project{
+.add-task,
+.add-project {
   display: grid;
   font-weight: initial;
   grid-template-columns: 24px 1fr;
@@ -146,20 +146,23 @@ html {
   padding: 10px;
 }
 
-.add-task-plus, .add-project-plus{
+.add-task-plus,
+.add-project-plus {
   height: 24px;
   width: 24px;
   background-image: url('./images/plus-circle-outline.svg');
   background-size: cover;
 }
 
-.add-task:hover, .add-project:hover { 
+.add-task:hover,
+.add-project:hover {
   color: darkgrey;
   outline: 1px solid darkgrey;
   border-radius: 10px;
 }
 
-.add-task:hover > .add-task-plus, .add-project:hover > .add-project-plus {
+.add-task:hover > .add-task-plus,
+.add-project:hover > .add-project-plus {
   background-image: url('./images/plus-circle.svg');
 }
 
@@ -185,7 +188,8 @@ legend {
   justify-content: space-between;
 }
 
-input, textarea {
+input,
+textarea {
   font-family: inherit;
 }
 
@@ -203,3 +207,22 @@ input, textarea {
 .number {
   color: darkgrey;
 }
+
+.add-project-form {
+  display: grid;
+  outline: 1px solid darkgrey;
+  padding: 10px;
+  border-radius: 10px;
+  gap: 12px;
+}
+
+button {
+  background: #0369a1;
+  color: white;
+  padding: 5px;
+  font-size: 1rem;
+  font-family: inherit;
+  border: none;
+  border-radius: 10px;
+}
+

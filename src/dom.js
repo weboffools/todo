@@ -224,8 +224,12 @@ function DOM() {
     form.setAttribute('action', '');
     const projectNameLabel = helpers.labelFor('project_name', 'Project Name');
     const projectName = helpers.inputID('project_name', 'text', 'project_name');
+    const button = helpers.elementClass('button', 'add-project-button');
+    button.textContent = 'Add Project';
+    button.setAttribute('type', 'submit');
     form.appendChild(projectNameLabel);
     form.appendChild(projectName);
+    form.appendChild(button);
 
     return form;
   }
