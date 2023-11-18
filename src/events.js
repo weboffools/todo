@@ -58,6 +58,7 @@ function addProjectEvent() {
 function submitEvent(form) {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
+    
     const task = new Task(
       e.target.task_name.value,
       e.target.task_descr.value,

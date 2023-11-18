@@ -5,6 +5,7 @@ class Task {
   type = 'task';
 
   constructor(name, descr, date, priority, project) {
+
     this.name = name;
     this.description = descr;
     this.date = date;
@@ -19,5 +20,3 @@ class Task {
 }
 
 export default Task;
-
-  

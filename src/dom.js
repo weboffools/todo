@@ -144,6 +144,7 @@ function DOM() {
 
     const taskNameLabel = helpers.labelFor('task_name', 'Task Name');
     const taskName = helpers.inputID('task_name', 'text', 'task_name');
+    taskName.setAttribute('required', true);
 
     const taskDescrLabel = helpers.labelFor('task_descr', 'Description');
     const taskDescr = document.createElement('textarea');
@@ -152,6 +153,7 @@ function DOM() {
 
     const dueDateLabel = helpers.labelFor('due_date', 'Due Date');
     const dueDate = helpers.inputID('due_date', 'date', 'due_date');
+    dueDate.setAttribute('value', format(new Date(), 'yyyy-MM-dd'));
 
     const priorityField = helpers.elementClass('fieldset', 'priority_fieldset');
     const priorityLegend = helpers.elementClass('legend', 'priority_legend');
@@ -224,6 +226,7 @@ function DOM() {
     form.setAttribute('action', '');
     const projectNameLabel = helpers.labelFor('project_name', 'Project Name');
     const projectName = helpers.inputID('project_name', 'text', 'project_name');
+    projectName.setAttribute('required', true);
     const button = helpers.elementClass('button', 'add-project-button');
     button.textContent = 'Add Project';
     button.setAttribute('type', 'submit');
