@@ -8,10 +8,17 @@ function upcomingEvent() {
   const main = DOM().getMainElement();
 
   upcomingMenuItem.addEventListener('click', () => {
-    main.replaceChildren();
-    main.appendChild(DOM().upcoming());
-    addTaskEvent();
+    replaceMain(DOM().upcoming(), main);
+    // main.replaceChildren();
+    // main.appendChild(DOM().upcoming());
+    // addTaskEvent();
   });
+}
+
+function replaceMain(page, area) {
+  area.replaceChildren();
+  area.appendChild(page);
+  addTaskEvent();
 }
 
 function todayEvent() {
@@ -27,27 +34,28 @@ function addTaskEvent() {
   const tasks = document.querySelectorAll('.add-task');
 
   tasks.forEach((task) => {
-    task.addEventListener(
-      'click',
-      (e) => {
-        const current = e.currentTarget;
-        let form = document.querySelector('.add-task-form');
-        if (form === null) {
-          current.replaceWith(DOM().taskForm());
-          let form = DOM().getTaskForm();
-          form.firstChild.focus();
-          submitEvent(form);
-        } else {
-          form.replaceWith(DOM().addTask());
-          current.replaceWith(DOM().taskForm());
-          form = DOM().getTaskForm();
-          form.firstChild.focus();
-          submitEvent(form);
-
-        }
-      }
-    );
+    task.addEventListener('click', (e) => {
+      const current = e.currentTarget;
+      addRemoveForm(current);
+    });
   });
+}
+
+function addRemoveForm(current) {
+  let form = document.querySelector('.add-task-form');
+  if (form === null) {
+    current.replaceWith(DOM().taskForm());
+    let form = DOM().getTaskForm();
+    form.firstChild.focus();
+    submitEvent(form);
+  } else {
+    form.replaceWith(DOM().addTask());
+    current.replaceWith(DOM().taskForm());
+    form = DOM().getTaskForm();
+    form.firstChild.focus();
+    submitEvent(form);
+    replaceMain(DOM().upcoming(), DOM().getMainElement());
+  }
 }
 
 function addProjectEvent() {
