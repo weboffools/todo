@@ -5,12 +5,14 @@ function DOM() {
   const sidebar = document.querySelector('.sidebar');
   const main = document.querySelector('.main-section');
   const header = document.querySelector('.header');
-  const form = document.querySelector('.add-task-form');
+  const tForm = document.querySelector('.add-task-form');
+  const proForm = document.querySelector('.add-project-form');
 
   const getSidebarElement = () => sidebar;
   const getMainElement = () => main;
   const getHeaderElement = () => header;
-  const getTaskForm = () => form;
+  const getTaskForm = () => tForm;
+  const getProjectForm = () => proForm;
 
   const helpers = Helpers();
 
@@ -45,13 +47,12 @@ function DOM() {
     container.appendChild(addProject());
 
     return container;
-
   }
 
   function makeProjectList() {
     const list = helpers.elementClass('ul', 'project-list');
     const projects = ManageStorage().getProjects();
-    
+
     for (let item of projects) {
       const li = helpers.elementClass('li', 'project-list-item');
       const div = document.createElement('div');
@@ -64,7 +65,7 @@ function DOM() {
       li.appendChild(div);
       list.appendChild(li);
     }
-    
+
     return list;
   }
 
@@ -217,17 +218,31 @@ function DOM() {
     return form;
   }
 
+  function projectForm() {
+    const form = helpers.elementClass('form', 'add-project-form');
+    form.setAttribute('method', 'post');
+    form.setAttribute('action', '');
+    const projectNameLabel = helpers.labelFor('project_name', 'Project Name');
+    const projectName = helpers.inputID('project_name', 'text', 'project_name');
+    form.appendChild(projectNameLabel);
+    form.appendChild(projectName);
+
+    return form;
+  }
+
   return {
     layout,
     makeToday,
     upcoming,
     makeSidebar,
     taskForm,
+    projectForm,
     addTask,
     getMainElement,
     getHeaderElement,
     getSidebarElement,
     getTaskForm,
+    getProjectForm,
   };
 }
 
