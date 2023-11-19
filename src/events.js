@@ -82,6 +82,7 @@ function submitEvent(form) {
       e.target.project.value,
     );
     ManageStorage().addToStore(task);
+    ManageStorage().addTaskToProject(task.project, task.fullKey);
     e.target.replaceWith(DOM().addTask());
   });
 }

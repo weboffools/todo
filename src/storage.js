@@ -1,5 +1,4 @@
 import Project from './project.js';
-import Task from './task.js';
 
 function ManageStorage() {
   const currentStore = Object.entries(localStorage);
@@ -31,7 +30,17 @@ function ManageStorage() {
     return projects;
   }
 
-  return { initStore, addToStore, storageLookup, getStore, getProjects };
+  function addTaskToProject(project, task) {
+    let projects = getProjects();
+    projects.forEach((p) => {
+      if (p.name.toLowerCase() === project) {
+        p.tasks.push(task);
+        console.log(p);
+        return;
+      }
+    });
+  }
+  return { initStore, addToStore, storageLookup, getStore, getProjects, addTaskToProject };
 }
 
 export default ManageStorage;
