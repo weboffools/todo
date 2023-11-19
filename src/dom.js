@@ -186,10 +186,10 @@ function DOM() {
     priorityField.appendChild(medium);
     priorityField.appendChild(low);
 
-    const projectLabel = helpers.labelFor('project', 'Select a Project');
+    const projectLabel = helpers.labelFor('project_select', 'Select a Project');
     const projectSelect = document.createElement('select');
     projectSelect.setAttribute('name', 'project');
-    projectSelect.setAttribute('id', 'project-select');
+    projectSelect.setAttribute('id', 'project_select');
     const defaultOption = document.createElement('option');
     defaultOption.setAttribute('value', '');
     defaultOption.textContent = '--Choose a Project--';

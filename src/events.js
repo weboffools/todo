@@ -9,9 +9,6 @@ function upcomingEvent() {
 
   upcomingMenuItem.addEventListener('click', () => {
     replaceMain(DOM().upcoming(), main);
-    // main.replaceChildren();
-    // main.appendChild(DOM().upcoming());
-    // addTaskEvent();
   });
 }
 
