@@ -13,7 +13,17 @@ function ManageStorage() {
   }
 
   function addToStore(item) {
-    localStorage.setItem(item.fullKey, JSON.stringify(item));
+    if (item instanceof Project) {
+      let projects = getProjects();
+      const exists = (project) => project.name === item.name;
+      if (projects.some(exists)) {
+        alert('Project already exists!');
+      } else {
+        localStorage.setItem(item.fullKey, JSON.stringify(item));
+      }
+    } else {
+      localStorage.setItem(item.fullKey, JSON.stringify(item));
+    }
   }
 
   function storageLookup(searchString, type) {
@@ -40,7 +50,14 @@ function ManageStorage() {
       }
     });
   }
-  return { initStore, addToStore, storageLookup, getStore, getProjects, addTaskToProject };
+  return {
+    initStore,
+    addToStore,
+    storageLookup,
+    getStore,
+    getProjects,
+    addTaskToProject,
+  };
 }
 
 export default ManageStorage;

@@ -3,7 +3,6 @@ import DOM from './dom.js';
 import { todayEvent, upcomingEvent, addProjectEvent } from './events.js';
 import ManageStorage from './storage';
 
-
 document.body.appendChild(DOM().layout());
 const main = DOM().getMainElement();
 const side = DOM().getSidebarElement();
@@ -17,3 +16,4 @@ todayEvent();
 upcomingEvent();
 addProjectEvent();
 ManageStorage().initStore();
+
