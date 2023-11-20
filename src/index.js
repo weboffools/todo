@@ -20,3 +20,5 @@ side.appendChild(sidelist);
 todayEvent();
 upcomingEvent();
 addProjectEvent();
+
+DOM().makeTaskList('2023-11-20');

@@ -1,6 +1,11 @@
 import { format, add } from 'date-fns';
 import ManageStorage from './storage';
-import { todayEvent, upcomingEvent, addProjectEvent, addTaskEvent } from './events.js';
+import {
+  todayEvent,
+  upcomingEvent,
+  addProjectEvent,
+  addTaskEvent,
+} from './events.js';
 
 function DOM() {
   const sidebar = document.querySelector('.sidebar');
@@ -86,7 +91,6 @@ function DOM() {
   }
 
   function refreshTaskArea() {
-
     const taskarea = getTaskArea();
     taskarea.appendChild(addTask());
     addTaskEvent();
@@ -112,6 +116,16 @@ function DOM() {
     }
 
     return list;
+  }
+
+  function makeTaskList(date) {
+    let tasks = ManageStorage().getTasks();
+    let tasksOnThisDate = tasks.filter((task) => task['date'] === date);
+    tasksOnThisDate.forEach((task) => {
+      let card = makeTaskCard(task);
+      let taskArea = getTaskArea();
+      taskArea.appendChild(card);
+    });
   }
 
   function makeToday() {
@@ -297,6 +311,7 @@ function DOM() {
     projectForm,
     addTask,
     makeTaskCard,
+    makeTaskList,
     getMainElement,
     getHeaderElement,
     getSidebarElement,

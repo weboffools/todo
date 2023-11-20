@@ -33,6 +33,13 @@ function ManageStorage() {
     return map;
   }
 
+  function getTasks() {
+    let tasks = getStore()
+      .map((entry) => JSON.parse(entry[1]))
+      .filter((obj) => obj['type'] === 'task');
+    return tasks;
+  }
+
   function getProjects() {
     let projects = getStore()
       .map((entry) => JSON.parse(entry[1]))
@@ -49,11 +56,14 @@ function ManageStorage() {
       }
     });
   }
+
+
   return {
     initStore,
     addToStore,
     storageLookup,
     getStore,
+    getTasks,
     getProjects,
     addTaskToProject,
   };
