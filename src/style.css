@@ -99,10 +99,12 @@ html {
 
 .sidebar ul > li {
   padding: 15px 10px;
+  transition: transform 300ms ease;
 }
 
 .sidebar ul > li:hover {
   background: lightpink;
+  transform: translate(5px);
 }
 
 .main-heading {
@@ -159,6 +161,7 @@ html {
   color: darkgrey;
   outline: 1px solid darkgrey;
   border-radius: 10px;
+  box-shadow: 3px 3px 2px grey;
 }
 
 .add-task:hover > .add-task-plus,
@@ -224,5 +227,10 @@ button {
   font-family: inherit;
   border: none;
   border-radius: 10px;
+  transition: scale 600ms ease-in-out;
 }
 
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 2px 2px 2px pink;
+}
