@@ -45,7 +45,6 @@ function ManageStorage() {
     projects.forEach((p) => {
       if (p.name.toLowerCase() === project) {
         p.tasks.push(task);
-        console.log(p);
         return;
       }
     });

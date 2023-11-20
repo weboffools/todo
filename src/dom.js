@@ -1,6 +1,6 @@
 import { format, add } from 'date-fns';
 import ManageStorage from './storage';
-import { todayEvent, upcomingEvent, addProjectEvent } from './events.js';
+import { todayEvent, upcomingEvent, addProjectEvent, addTaskEvent } from './events.js';
 
 function DOM() {
   const sidebar = document.querySelector('.sidebar');
@@ -8,12 +8,14 @@ function DOM() {
   const header = document.querySelector('.header');
   const tForm = document.querySelector('.add-task-form');
   const proForm = document.querySelector('.add-project-form');
+  const taskarea = document.querySelector('.task-container');
 
   const getSidebarElement = () => sidebar;
   const getMainElement = () => main;
   const getHeaderElement = () => header;
   const getTaskForm = () => tForm;
   const getProjectForm = () => proForm;
+  const getTaskArea = () => taskarea;
 
   const helpers = Helpers();
 
@@ -28,6 +30,29 @@ function DOM() {
     container.appendChild(main);
 
     return container;
+  }
+
+  function makeTaskCard(task) {
+    const taskDiv = helpers.elementClass('div', 'task-card');
+
+    const taskName = helpers.elementClass('div', 'task-name-div');
+    taskName.textContent = task.name;
+
+    const dueDate = helpers.elementClass('div', 'date-div');
+    dueDate.textContent = task.date;
+
+    const priority = helpers.elementClass('div', 'priority-div');
+    priority.textContent = task.priority;
+
+    const project = helpers.elementClass('div', 'part-of-project');
+    project.textContent = task.project;
+
+    taskDiv.appendChild(taskName);
+    taskDiv.appendChild(dueDate);
+    taskDiv.appendChild(priority);
+    taskDiv.appendChild(project);
+
+    return taskDiv;
   }
 
   function makeSidebar() {
@@ -60,6 +85,14 @@ function DOM() {
     addProjectEvent();
   }
 
+  function refreshTaskArea() {
+
+    const taskarea = getTaskArea();
+    taskarea.appendChild(addTask());
+    addTaskEvent();
+
+    return taskarea;
+  }
 
   function makeProjectList() {
     const list = helpers.elementClass('ul', 'project-list');
@@ -82,16 +115,20 @@ function DOM() {
   }
 
   function makeToday() {
+    const todayContainer = helpers.elementClass('div', 'today-container');
     const headingMain = helpers.elementClass('div', 'main-heading');
     const headingTitle = helpers.elementClass('div', 'main-heading-title');
     headingTitle.textContent = 'Today';
     const headingDate = helpers.elementClass('div', 'main-heading-date');
     headingDate.textContent = format(new Date(), 'EE, MMM do');
-
     headingMain.appendChild(headingTitle);
     headingMain.appendChild(headingDate);
 
-    return headingMain;
+    const taskContainer = helpers.elementClass('div', 'task-container');
+
+    todayContainer.appendChild(headingMain);
+    todayContainer.appendChild(taskContainer);
+    return todayContainer;
   }
 
   function upcoming() {
@@ -255,12 +292,15 @@ function DOM() {
     upcoming,
     makeSidebar,
     refreshSidebar,
+    refreshTaskArea,
     taskForm,
     projectForm,
     addTask,
+    makeTaskCard,
     getMainElement,
     getHeaderElement,
     getSidebarElement,
+    getTaskArea,
     getTaskForm,
     getProjectForm,
   };

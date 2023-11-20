@@ -24,6 +24,7 @@ function todayEvent() {
   todayMenuItem.addEventListener('click', () => {
     main.replaceChildren();
     main.appendChild(DOM().makeToday());
+    DOM().refreshTaskArea();
   });
 }
 
@@ -96,4 +97,4 @@ function newProjectEvent(form) {
   });
 }
 
-export { upcomingEvent, submitEvent, todayEvent, addProjectEvent };
+export { upcomingEvent, submitEvent, todayEvent, addProjectEvent, addTaskEvent };
