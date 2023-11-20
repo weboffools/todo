@@ -92,8 +92,7 @@ function newProjectEvent(form) {
     e.preventDefault();
     const project = new Project(e.target.project_name.value);
     ManageStorage().addToStore(project);
-    DOM().getSidebarElement().replaceChildren(DOM().makeSidebar());
-    addProjectEvent();
+    DOM().refreshSidebar();
   });
 }
 

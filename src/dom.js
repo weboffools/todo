@@ -1,5 +1,6 @@
 import { format, add } from 'date-fns';
 import ManageStorage from './storage';
+import { todayEvent, upcomingEvent, addProjectEvent } from './events.js';
 
 function DOM() {
   const sidebar = document.querySelector('.sidebar');
@@ -48,6 +49,17 @@ function DOM() {
 
     return container;
   }
+
+  function refreshSidebar() {
+    const side = getSidebarElement();
+    const sideContent = makeSidebar();
+
+    side.replaceChildren(sideContent);
+    todayEvent();
+    upcomingEvent();
+    addProjectEvent();
+  }
+
 
   function makeProjectList() {
     const list = helpers.elementClass('ul', 'project-list');
@@ -242,6 +254,7 @@ function DOM() {
     makeToday,
     upcoming,
     makeSidebar,
+    refreshSidebar,
     taskForm,
     projectForm,
     addTask,
