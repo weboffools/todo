@@ -75,6 +75,8 @@ function submitEvent(form) {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
+    let parentE = e.target.parentElement;
+    const taskarea = DOM().getTaskAreas();
     const task = new Task(
       e.target.task_name.value,
       e.target.task_descr.value,
@@ -84,7 +86,7 @@ function submitEvent(form) {
     );
     ManageStorage().addToStore(task);
     ManageStorage().addTaskToProject(task.project, task.fullKey);
-    e.target.replaceWith(DOM().addTask());
+    DOM().refreshTaskArea(taskarea);
   });
 }
 

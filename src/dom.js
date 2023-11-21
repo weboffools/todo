@@ -44,13 +44,13 @@ function DOM() {
     taskName.textContent = task.name;
 
     const dueDate = helpers.elementClass('div', 'date-div');
-    dueDate.textContent = task.date;
+    dueDate.textContent = `Due Date: ${task.date}`;
 
     const priority = helpers.elementClass('div', 'priority-div');
-    priority.textContent = task.priority;
+    priority.textContent = `Priority: ${task.priority.toUpperCase()}`;
 
     const project = helpers.elementClass('div', 'part-of-project');
-    project.textContent = task.project;
+    project.textContent = `Project: ${task.project}`;
 
     taskDiv.appendChild(taskName);
     taskDiv.appendChild(dueDate);
