@@ -13,14 +13,14 @@ function DOM() {
   const header = document.querySelector('.header');
   const tForm = document.querySelector('.add-task-form');
   const proForm = document.querySelector('.add-project-form');
-  const taskarea = document.querySelector('.task-container');
+  const taskarea = document.querySelectorAll('.task-container');
 
   const getSidebarElement = () => sidebar;
   const getMainElement = () => main;
   const getHeaderElement = () => header;
   const getTaskForm = () => tForm;
   const getProjectForm = () => proForm;
-  const getTaskArea = () => taskarea;
+  const getTaskAreas = () => taskarea;
 
   const helpers = Helpers();
 
@@ -90,11 +90,17 @@ function DOM() {
     addProjectEvent();
   }
 
-  function refreshTaskArea() {
-    const taskarea = getTaskArea();
-    taskarea.appendChild(addTask());
+  function refreshTaskArea(taskarea) {
+    if (taskarea.length > 1) {
+      taskarea.forEach((task) => {
+        console.log(task);
+      });
+    } else {
+      taskarea = taskarea[0];
+      makeTaskList(taskarea.dataset.thisDate, taskarea);
+      taskarea.appendChild(addTask());
+    }
     addTaskEvent();
-
     return taskarea;
   }
 
@@ -118,17 +124,17 @@ function DOM() {
     return list;
   }
 
-  function makeTaskList(date) {
+  function makeTaskList(date, area) {
     let tasks = ManageStorage().getTasks();
     let tasksOnThisDate = tasks.filter((task) => task['date'] === date);
     tasksOnThisDate.forEach((task) => {
       let card = makeTaskCard(task);
-      let taskArea = getTaskArea();
-      taskArea.appendChild(card);
+      area.appendChild(card);
     });
   }
 
   function makeToday() {
+    const date = format(new Date(), 'yyyy-MM-dd');
     const todayContainer = helpers.elementClass('div', 'today-container');
     const headingMain = helpers.elementClass('div', 'main-heading');
     const headingTitle = helpers.elementClass('div', 'main-heading-title');
@@ -139,6 +145,8 @@ function DOM() {
     headingMain.appendChild(headingDate);
 
     const taskContainer = helpers.elementClass('div', 'task-container');
+    taskContainer.setAttribute('data-this-date', date);
+
 
     todayContainer.appendChild(headingMain);
     todayContainer.appendChild(taskContainer);
@@ -152,6 +160,8 @@ function DOM() {
       let day = helpers.elementClass('div', `day-${i}`);
       day.classList.add('day');
       let today = new Date();
+      let thisDay = format(add(today, { days: `${i}` }), 'yyyy-MM-dd');
+
 
       let dayHead = helpers.elementClass('div', 'day-head');
       let dayHeadDOW = helpers.elementClass('div', 'weekday');
@@ -161,13 +171,14 @@ function DOM() {
         add(today, { days: `${i}` }),
         'MMM dd',
       );
-      let dayBody = helpers.elementClass('div', `day-${i}-body`);
-      dayBody.appendChild(addTask());
+      let taskContent = helpers.elementClass('div', 'task-container');
+      taskContent.setAttribute('data-this-date', thisDay);
+      taskContent.appendChild(addTask());
       dayHead.appendChild(dayHeadDOW);
       dayHead.appendChild(dayHeadMonthDay);
       day.appendChild(dayHead);
 
-      day.appendChild(dayBody);
+      day.appendChild(taskContent);
       container.appendChild(day);
     }
 
@@ -315,7 +326,7 @@ function DOM() {
     getMainElement,
     getHeaderElement,
     getSidebarElement,
-    getTaskArea,
+    getTaskAreas,
     getTaskForm,
     getProjectForm,
   };
