@@ -92,12 +92,21 @@ function DOM() {
 
   function refreshTaskArea(taskarea) {
     if (taskarea.length > 1) {
-      taskarea.forEach((task) => {
-        console.log(task);
+      taskarea.forEach((area) => {
+        area.replaceChildren();
+        let cards = makeTaskList(area.dataset.thisDate);
+        cards.forEach((card) => {
+          area.appendChild(card);
+        });
+        area.appendChild(addTask());
       });
     } else {
       taskarea = taskarea[0];
-      makeTaskList(taskarea.dataset.thisDate, taskarea);
+      taskarea.replaceChildren();
+      let cards = makeTaskList(taskarea.dataset.thisDate);
+      cards.forEach((card) => {
+        taskarea.appendChild(card);
+      });
       taskarea.appendChild(addTask());
     }
     addTaskEvent();
@@ -124,13 +133,13 @@ function DOM() {
     return list;
   }
 
-  function makeTaskList(date, area) {
+  function makeTaskList(date) {
     let tasks = ManageStorage().getTasks();
     let tasksOnThisDate = tasks.filter((task) => task['date'] === date);
-    tasksOnThisDate.forEach((task) => {
-      let card = makeTaskCard(task);
-      area.appendChild(card);
+    let cards = tasksOnThisDate.map((task) => {
+      return makeTaskCard(task);
     });
+    return cards;
   }
 
   function makeToday() {
@@ -147,7 +156,6 @@ function DOM() {
     const taskContainer = helpers.elementClass('div', 'task-container');
     taskContainer.setAttribute('data-this-date', date);
 
-
     todayContainer.appendChild(headingMain);
     todayContainer.appendChild(taskContainer);
     return todayContainer;
@@ -161,7 +169,6 @@ function DOM() {
       day.classList.add('day');
       let today = new Date();
       let thisDay = format(add(today, { days: `${i}` }), 'yyyy-MM-dd');
-
 
       let dayHead = helpers.elementClass('div', 'day-head');
       let dayHeadDOW = helpers.elementClass('div', 'weekday');

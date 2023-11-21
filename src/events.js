@@ -9,6 +9,7 @@ function upcomingEvent() {
 
   upcomingMenuItem.addEventListener('click', () => {
     replaceMain(DOM().upcoming(), main);
+    DOM().refreshTaskArea(DOM().getTaskAreas());
   });
 }
 
@@ -24,7 +25,7 @@ function todayEvent() {
   todayMenuItem.addEventListener('click', () => {
     main.replaceChildren();
     main.appendChild(DOM().makeToday());
-    DOM().refreshTaskArea();
+    DOM().refreshTaskArea(DOM().getTaskAreas());
   });
 }
 
