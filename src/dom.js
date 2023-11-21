@@ -193,7 +193,7 @@ function DOM() {
   }
 
   function addTask() {
-    const div = helpers.elementClass('div', 'add-task');
+    const div = helpers.elementClass('button', 'add-task');
     const text = helpers.elementClass('div', 'add-task-text');
     const plus = helpers.elementClass('div', 'add-task-plus');
 
@@ -206,7 +206,7 @@ function DOM() {
   }
 
   function addProject() {
-    const div = helpers.elementClass('div', 'add-project');
+    const div = helpers.elementClass('button', 'add-project');
     const text = helpers.elementClass('div', 'add-project-text');
     const plus = helpers.elementClass('div', 'add-project-plus');
 
