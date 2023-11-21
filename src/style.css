@@ -234,3 +234,42 @@ button:hover {
   transform: scale(1.05);
   box-shadow: 2px 2px 2px pink;
 }
+
+.task-container {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+}
+
+.task-card {
+  display: grid;
+  padding: 10px;
+  justify-items: center;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr 1fr 1fr;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.task-name-div {
+  font-size: 1.25rem;
+  font-weight: 700;
+  grid-column: 1 / 3;
+  grid-row: 1 / 2;
+}
+
+.date-div {
+  font-weight: 600;
+  grid-column: 1 / 3;
+  grid-row: 2 / 3;
+}
+
+.priority-div {
+  grid-column: 1 / 2;
+  grid-row: 3 / 4;
+}
+
+.part-of-project {
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+}
