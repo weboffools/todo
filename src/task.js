@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 class Task {
   _id = uuidv4().slice(24);
+  creation = Date.now();
   type = 'task';
 
   constructor(name, descr, date, priority, project) {

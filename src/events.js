@@ -76,7 +76,6 @@ function submitEvent(form) {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    let parentE = e.target.parentElement;
     const taskarea = DOM().getTaskAreas();
     const task = new Task(
       e.target.task_name.value,
@@ -100,4 +99,18 @@ function newProjectEvent(form) {
   });
 }
 
-export { upcomingEvent, submitEvent, todayEvent, addProjectEvent, addTaskEvent };
+function checkOffTask() {
+  const checkButton = document.querySelectorAll('.check-off');
+
+  checkButton.forEach((button) => {
+    button.addEventListener('click', (e) => {
+      let id = e.target.parentElement.dataset.taskId;
+      console.log(id);
+      localStorage.removeItem(id);
+      let taskarea = DOM().getTaskAreas();
+      DOM().refreshTaskArea(taskarea);
+    });
+  });
+}
+
+export { upcomingEvent, submitEvent, todayEvent, addProjectEvent, addTaskEvent, checkOffTask };

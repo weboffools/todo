@@ -5,6 +5,7 @@ import {
   upcomingEvent,
   addProjectEvent,
   addTaskEvent,
+  checkOffTask,
 } from './events.js';
 
 function DOM() {
@@ -39,23 +40,24 @@ function DOM() {
 
   function makeTaskCard(task) {
     const taskDiv = helpers.elementClass('div', 'task-card');
+    taskDiv.setAttribute('data-task-id', `${task.name}_${task._id}`);
 
     const taskName = helpers.elementClass('div', 'task-name-div');
     taskName.textContent = task.name;
 
-    const dueDate = helpers.elementClass('div', 'date-div');
-    dueDate.textContent = `Due Date: ${task.date}`;
+    const checkOff = helpers.elementClass('button', 'check-off');
 
     const priority = helpers.elementClass('div', 'priority-div');
-    priority.textContent = `Priority: ${task.priority.toUpperCase()}`;
+    priority.textContent = `${task.priority.toUpperCase()}`;
 
     const project = helpers.elementClass('div', 'part-of-project');
     project.textContent = `Project: ${task.project}`;
 
     taskDiv.appendChild(taskName);
-    taskDiv.appendChild(dueDate);
+    taskDiv.appendChild(checkOff);
     taskDiv.appendChild(priority);
     taskDiv.appendChild(project);
+    
 
     return taskDiv;
   }
@@ -99,6 +101,7 @@ function DOM() {
           area.appendChild(card);
         });
         area.appendChild(addTask());
+        checkOffTask();
       });
     } else {
       taskarea = taskarea[0];
@@ -108,6 +111,7 @@ function DOM() {
         taskarea.appendChild(card);
       });
       taskarea.appendChild(addTask());
+      checkOffTask();
     }
     addTaskEvent();
     return taskarea;
@@ -135,7 +139,8 @@ function DOM() {
 
   function makeTaskList(date) {
     let tasks = ManageStorage().getTasks();
-    let tasksOnThisDate = tasks.filter((task) => task['date'] === date);
+    let tasksOnThisDate = tasks.filter((task) => task['date'] === date)
+      .sort((a, b) => a.creation < b.creation ? 1 : -1);
     let cards = tasksOnThisDate.map((task) => {
       return makeTaskCard(task);
     });
