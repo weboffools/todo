@@ -51,12 +51,20 @@ function ManageStorage() {
     let projects = getProjects();
     projects.forEach((p) => {
       if (p.name.toLowerCase() === project) {
+        let key = `${p.name}_${p._id}`;
         p.tasks.push(task);
+        localStorage.setItem(key, JSON.stringify(p));
         return;
       }
     });
   }
 
+  function getNumTasksInProject() {
+    let projects = getProjects();
+
+
+    return projects[0].tasks.length;
+  }
 
   return {
     initStore,
@@ -66,6 +74,7 @@ function ManageStorage() {
     getTasks,
     getProjects,
     addTaskToProject,
+    getNumTasksInProject,
   };
 }
 
