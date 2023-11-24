@@ -51,7 +51,9 @@ function DOM() {
     priority.textContent = `${task.priority.toUpperCase()}`;
 
     const project = helpers.elementClass('div', 'part-of-project');
-    project.textContent = `Project: ${task.project}`;
+    const projectName = task.project.split('_')[0];
+
+    project.textContent = `Project: ${projectName}`;
 
     taskDiv.appendChild(taskName);
     taskDiv.appendChild(checkOff);
@@ -101,7 +103,6 @@ function DOM() {
           area.appendChild(card);
         });
         area.appendChild(addTask());
-        checkOffTask();
       });
     } else {
       taskarea = taskarea[0];
@@ -111,8 +112,8 @@ function DOM() {
         taskarea.appendChild(card);
       });
       taskarea.appendChild(addTask());
-      checkOffTask();
     }
+    checkOffTask();
     addTaskEvent();
     return taskarea;
   }
@@ -180,6 +181,7 @@ function DOM() {
       let dayHeadMonthDay = helpers.elementClass('div', 'month-day');
       dayHeadDOW.textContent = format(add(today, { days: `${i}` }), 'EEEE');
       dayHeadMonthDay.textContent = format(
+
         add(today, { days: `${i}` }),
         'MMM dd',
       );
@@ -280,10 +282,9 @@ function DOM() {
     defaultOption.setAttribute('value', '');
     defaultOption.textContent = '--Choose a Project--';
     projectSelect.appendChild(defaultOption);
-    let projectArray = ManageStorage().storageLookup('project', 'type');
+    let projectArray = ManageStorage().getProjects();
     for (let item of projectArray) {
-      const name = item.name.toLowerCase();
-      const project = helpers.optionValue(`${name}`);
+      const project = helpers.optionValue(`${item.name}_${item._id}`);
       project.textContent = item.name;
       projectSelect.appendChild(project);
     }
