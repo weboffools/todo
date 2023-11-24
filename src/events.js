@@ -115,4 +115,17 @@ function checkOffTask() {
   });
 }
 
-export { upcomingEvent, submitEvent, todayEvent, addProjectEvent, addTaskEvent, checkOffTask };
+function editTask() {
+  const taskCard = document.querySelectorAll('.task-card');
+
+  taskCard.forEach((card) => {
+    card.addEventListener('click', (e) => {
+      const key = e.currentTarget.dataset.taskId;
+      const task = localStorage.getItem(key);
+      console.log(JSON.parse(task));
+    });
+  });
+}
+
+
+export { upcomingEvent, submitEvent, todayEvent, addProjectEvent, addTaskEvent, checkOffTask, editTask };
