@@ -17,6 +17,7 @@ function replaceMain(page, area) {
   area.replaceChildren();
   area.appendChild(page);
   DOM().refreshTaskArea(DOM().getTaskAreas());
+  
 }
 
 function todayEvent() {
@@ -125,6 +126,7 @@ function editTask() {
       let taskname = task.name;
       let description = task.descr;
       DOM().getMainElement().replaceWith(DOM().taskForm({name: taskname, descr: description,}));
+      
     });
   });
   
