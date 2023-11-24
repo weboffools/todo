@@ -43,13 +43,13 @@ function addTaskEvent() {
 function addRemoveForm(current) {
   let form = document.querySelector('.add-task-form');
   if (form === null) {
-    current.replaceWith(DOM().taskForm());
+    current.replaceWith(DOM().taskForm({ name: 'Task Name', descr: '', project: 'Home',}));
     let form = DOM().getTaskForm();
     form.firstChild.focus();
     submitEvent(form);
   } else {
     form.replaceWith(DOM().addTask());
-    current.replaceWith(DOM().taskForm());
+    current.replaceWith(DOM().taskForm({ name: 'Task Name', descr: '', project: 'Home',}));
     form = DOM().getTaskForm();
     form.firstChild.focus();
     submitEvent(form);
@@ -116,15 +116,18 @@ function checkOffTask() {
 }
 
 function editTask() {
-  const taskCard = document.querySelectorAll('.task-card');
-
-  taskCard.forEach((card) => {
+  const tasks = document.querySelectorAll('.task-card');
+  tasks.forEach((card) => {
     card.addEventListener('click', (e) => {
-      const key = e.currentTarget.dataset.taskId;
-      const task = localStorage.getItem(key);
-      console.log(JSON.parse(task));
+      let key = e.currentTarget.dataset.taskId;
+      let task = JSON.parse(localStorage.getItem(key));
+      console.log(task);
+      let taskname = task.name;
+      let description = task.descr;
+      DOM().getMainElement().replaceWith(DOM().taskForm({name: taskname, descr: description,}));
     });
   });
+  
 }
 
 

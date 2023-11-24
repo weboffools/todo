@@ -6,6 +6,7 @@ import {
   addProjectEvent,
   addTaskEvent,
   checkOffTask,
+  editTask,
 } from './events.js';
 
 function DOM() {
@@ -59,7 +60,6 @@ function DOM() {
     taskDiv.appendChild(checkOff);
     taskDiv.appendChild(priority);
     taskDiv.appendChild(project);
-    
 
     return taskDiv;
   }
@@ -140,8 +140,9 @@ function DOM() {
 
   function makeTaskList(date) {
     let tasks = ManageStorage().getTasks();
-    let tasksOnThisDate = tasks.filter((task) => task['date'] === date)
-      .sort((a, b) => a.creation < b.creation ? 1 : -1);
+    let tasksOnThisDate = tasks
+      .filter((task) => task['date'] === date)
+      .sort((a, b) => (a.creation < b.creation ? 1 : -1));
     let cards = tasksOnThisDate.map((task) => {
       return makeTaskCard(task);
     });
@@ -181,7 +182,6 @@ function DOM() {
       let dayHeadMonthDay = helpers.elementClass('div', 'month-day');
       dayHeadDOW.textContent = format(add(today, { days: `${i}` }), 'EEEE');
       dayHeadMonthDay.textContent = format(
-
         add(today, { days: `${i}` }),
         'MMM dd',
       );
@@ -225,7 +225,7 @@ function DOM() {
     return div;
   }
 
-  function taskForm() {
+  function taskForm(defaults) {
     const form = helpers.elementClass('form', 'add-task-form');
     form.setAttribute('method', 'post');
     form.setAttribute('action', '');
@@ -233,11 +233,14 @@ function DOM() {
     const taskNameLabel = helpers.labelFor('task_name', 'Task Name');
     const taskName = helpers.inputID('task_name', 'text', 'task_name');
     taskName.setAttribute('required', true);
+    taskName.setAttribute('value', defaults.name);
+    taskName.select();
 
     const taskDescrLabel = helpers.labelFor('task_descr', 'Description');
     const taskDescr = document.createElement('textarea');
     taskDescr.setAttribute('id', 'task_descr');
     taskDescr.setAttribute('name', 'task_descr');
+    taskDescr.setAttribute('value', defaults.descr);
 
     const dueDateLabel = helpers.labelFor('due_date', 'Due Date');
     const dueDate = helpers.inputID('due_date', 'date', 'due_date');

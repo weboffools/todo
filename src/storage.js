@@ -48,29 +48,31 @@ function ManageStorage() {
   }
 
   function addTaskToProject(project, task) {
-    let p = JSON.parse(localStorage
-      .getItem(project));
-    p.tasks.push(task);
-    localStorage.setItem(project, JSON.stringify(p));
-
-    // let projects = getProjects();
-    // projects.forEach((p) => {
-    //   if (p.name.toLowerCase() === project.toLowerCase()) {
-    //     let key = `${p.name}_${p._id}`;
-    //     p.tasks.push(task);
-    //     localStorage.setItem(key, JSON.stringify(p));
-    //     return;
-    //   }
-    // });
-    //
+    
+    let projects = getProjects();
+    projects.forEach((p) => {
+      if (p.name.toLowerCase() === project.toLowerCase()) {
+        let key = `${p.name}_${p._id}`;
+        p.tasks.push(task);
+        localStorage.setItem(key, JSON.stringify(p));
+        return;
+      }
+    });
+    
   }
 
   function removeTaskFromProject(project, taskId) {
-    const p = JSON.parse(localStorage
-      .getItem(project));
-    const index = p.tasks.indexOf(taskId);
-    p.tasks.splice(index, 1);
-    localStorage.setItem(project, JSON.stringify(p));
+    let projects = getProjects();
+    projects.forEach((p) => {
+      if (p.name.toLowerCase() === project.toLowerCase()) {
+        const index = p.tasks.indexOf(taskId);
+        p.tasks.splice(index, 1);
+        localStorage.setItem(project, JSON.stringify(p));
+        
+        return;
+      }
+    });
+    
   }
     
 
