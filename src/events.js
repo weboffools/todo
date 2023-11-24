@@ -16,7 +16,7 @@ function upcomingEvent() {
 function replaceMain(page, area) {
   area.replaceChildren();
   area.appendChild(page);
-  addTaskEvent();
+  DOM().refreshTaskArea(DOM().getTaskAreas());
 }
 
 function todayEvent() {
@@ -105,7 +105,9 @@ function checkOffTask() {
   checkButton.forEach((button) => {
     button.addEventListener('click', (e) => {
       let id = e.target.parentElement.dataset.taskId;
-      console.log(id);
+      let task = JSON.parse(localStorage.getItem(id));
+      let project = task.project;
+      ManageStorage().removeTaskFromProject(project, id);
       localStorage.removeItem(id);
       let taskarea = DOM().getTaskAreas();
       DOM().refreshTaskArea(taskarea);
