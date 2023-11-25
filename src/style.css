@@ -319,3 +319,7 @@ form button:hover {
   grid-column: 2 / 3;
   grid-row: 3 / 4;
 }
+
+.task-list-item {
+  font-size: 0.9rem;
+}

@@ -1,6 +1,6 @@
 import './style.css';
 import DOM from './dom.js';
-import { todayEvent, upcomingEvent, addProjectEvent, editTask, } from './events.js';
+import { todayEvent, upcomingEvent, addProjectEvent, editTask, openProject } from './events.js';
 import ManageStorage from './storage';
 
 ManageStorage().initStore();
@@ -20,4 +20,5 @@ main.appendChild(DOM().refreshTaskArea(taskarea));
 todayEvent();
 upcomingEvent();
 addProjectEvent();
-editTask();
+openProject();
+

@@ -17,6 +17,7 @@ function replaceMain(page, area) {
   area.replaceChildren();
   area.appendChild(page);
   DOM().refreshTaskArea(DOM().getTaskAreas());
+  DOM().refreshSidebar();
   
 }
 
@@ -88,6 +89,7 @@ function submitEvent(form) {
     ManageStorage().addToStore(task);
     ManageStorage().addTaskToProject(task.project, task.fullKey);
     DOM().refreshTaskArea(taskarea);
+    DOM().refreshSidebar();
   });
 }
 
@@ -112,6 +114,7 @@ function checkOffTask() {
       localStorage.removeItem(id);
       let taskarea = DOM().getTaskAreas();
       DOM().refreshTaskArea(taskarea);
+      DOM().refreshSidebar();
     });
   });
 }
@@ -122,7 +125,6 @@ function editTask() {
     card.addEventListener('click', (e) => {
       let key = e.currentTarget.dataset.taskId;
       let task = JSON.parse(localStorage.getItem(key));
-      console.log(task);
       let taskname = task.name;
       let description = task.descr;
       DOM().getMainElement().replaceWith(DOM().taskForm({name: taskname, descr: description,}));
@@ -132,5 +134,18 @@ function editTask() {
   
 }
 
+function openProject() {
+  const items = document.querySelectorAll('.project-list-item');
 
-export { upcomingEvent, submitEvent, todayEvent, addProjectEvent, addTaskEvent, checkOffTask, editTask };
+  items.forEach((item) => {
+    item.addEventListener('click', (e) => {
+      const key = e.currentTarget.dataset.projectId;
+      if (e.currentTarget.lastChild.getAttribute('class') !== 'project-task-list') {
+        e.currentTarget.append(DOM().makeProjectTaskList(key));
+      }
+    });
+  });
+}
+
+
+export { upcomingEvent, submitEvent, todayEvent, addProjectEvent, addTaskEvent, checkOffTask, editTask, openProject };

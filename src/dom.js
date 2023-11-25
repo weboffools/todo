@@ -7,6 +7,7 @@ import {
   addTaskEvent,
   checkOffTask,
   editTask,
+  openProject,
 } from './events.js';
 
 function DOM() {
@@ -92,6 +93,7 @@ function DOM() {
     todayEvent();
     upcomingEvent();
     addProjectEvent();
+    openProject();
   }
 
   function refreshTaskArea(taskarea) {
@@ -124,6 +126,7 @@ function DOM() {
 
     for (let item of projects) {
       const li = helpers.elementClass('li', 'project-list-item');
+      li.setAttribute('data-project-id', `${item.name}_${item._id}`);
       const div = document.createElement('div');
       const name = document.createElement('span');
       name.textContent = item.name;
@@ -135,6 +138,24 @@ function DOM() {
       list.appendChild(li);
     }
 
+    return list;
+  }
+
+  function makeProjectTaskList(key) {
+    const list = helpers.elementClass('ul', 'project-task-list');
+    const tasks = ManageStorage().getTasksInProject(key);
+
+    for (const task of tasks) {
+      const namePart = task.split('_')[0];
+      const idPart = task.split('_')[1];
+      const li = helpers.elementClass('li', 'task-list-item');
+      li.setAttribute('data-task-id', `${namePart}_${idPart}`);
+      const name = document.createElement('span');
+      name.textContent = namePart;
+      li.appendChild(name);
+      list.appendChild(li);
+
+    }
     return list;
   }
 
@@ -345,6 +366,7 @@ function DOM() {
     getTaskAreas,
     getTaskForm,
     getProjectForm,
+    makeProjectTaskList,
   };
 }
 

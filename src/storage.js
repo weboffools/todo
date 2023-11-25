@@ -49,36 +49,30 @@ function ManageStorage() {
 
   function addTaskToProject(project, task) {
     
-    let projects = getProjects();
-    projects.forEach((p) => {
-      if (p.name.toLowerCase() === project.toLowerCase()) {
-        let key = `${p.name}_${p._id}`;
-        p.tasks.push(task);
-        localStorage.setItem(key, JSON.stringify(p));
-        return;
-      }
-    });
-    
+    let p = JSON.parse(localStorage.getItem(project));
+    p.tasks.push(task);
+    localStorage.setItem(project, JSON.stringify(p));
+    return;
   }
 
-  function removeTaskFromProject(project, taskId) {
-    let projects = getProjects();
-    projects.forEach((p) => {
-      if (p.name.toLowerCase() === project.toLowerCase()) {
-        const index = p.tasks.indexOf(taskId);
-        p.tasks.splice(index, 1);
-        localStorage.setItem(project, JSON.stringify(p));
+  function removeTaskFromProject(key) {
+    let project = JSON.parse(localStorage.getItem(key));
+    const index = project.tasks.indexOf(key);
+    project.tasks.splice(index, 1);
+    localStorage.setItem(key, JSON.stringify(project));
         
-        return;
-      }
-    });
+    return;
     
   }
     
-
   function getNumTasksInProject() {
     let projects = getProjects();
     return projects[0].tasks.length;
+  }
+
+  function getTasksInProject(key) {
+    let project = JSON.parse(localStorage.getItem(key));
+    return project.tasks;
   }
 
   return {
@@ -91,6 +85,7 @@ function ManageStorage() {
     addTaskToProject,
     removeTaskFromProject,
     getNumTasksInProject,
+    getTasksInProject,
   };
 }
 
