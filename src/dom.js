@@ -57,10 +57,14 @@ function DOM() {
 
     project.textContent = `Project: ${projectName}`;
 
+    const edit = helpers.elementClass('button', 'edit-btn');
+    edit.textContent = "Edit"
+
     taskDiv.appendChild(taskName);
     taskDiv.appendChild(checkOff);
     taskDiv.appendChild(priority);
     taskDiv.appendChild(project);
+    taskDiv.appendChild(edit);
 
     return taskDiv;
   }
@@ -117,6 +121,7 @@ function DOM() {
     }
     checkOffTask();
     addTaskEvent();
+    editTask();
     return taskarea;
   }
 
@@ -246,8 +251,8 @@ function DOM() {
     return div;
   }
 
-  function taskForm(defaults) {
-    const form = helpers.elementClass('form', 'add-task-form');
+  function taskForm(defaults, css) {
+    const form = helpers.elementClass('form', css);
     form.setAttribute('method', 'post');
     form.setAttribute('action', '');
 
@@ -302,6 +307,7 @@ function DOM() {
     const projectSelect = document.createElement('select');
     projectSelect.setAttribute('name', 'project');
     projectSelect.setAttribute('id', 'project_select');
+    projectSelect.setAttribute('required', true);
     const defaultOption = document.createElement('option');
     defaultOption.setAttribute('value', '');
     defaultOption.textContent = '--Choose a Project--';
@@ -315,7 +321,7 @@ function DOM() {
 
     const submitButton = document.createElement('button');
     submitButton.setAttribute('type', 'submit');
-    submitButton.textContent = 'Add Task';
+    submitButton.textContent = 'Submit';
 
     form.appendChild(taskNameLabel);
     form.appendChild(taskName);
@@ -348,6 +354,13 @@ function DOM() {
     return form;
   }
 
+  function editForm(task) {
+    const dialog = helpers.elementClass('dialog', 'edit-dialog');
+    const form = taskForm(task, 'edit-form');
+    dialog.appendChild(form);
+    return dialog;
+  }
+
   return {
     layout,
     makeToday,
@@ -367,6 +380,7 @@ function DOM() {
     getTaskForm,
     getProjectForm,
     makeProjectTaskList,
+    editForm,
   };
 }
 

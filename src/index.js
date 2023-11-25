@@ -21,4 +21,3 @@ todayEvent();
 upcomingEvent();
 addProjectEvent();
 openProject();
-

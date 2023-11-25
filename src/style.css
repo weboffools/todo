@@ -193,7 +193,7 @@ html {
   background-image: url('./images/plus-circle.svg');
 }
 
-.add-task-form {
+.add-task-form, .edit-form{
   display: grid;
   outline: 1px solid darkgrey;
   padding: 10px;
@@ -201,7 +201,7 @@ html {
   gap: 12px;
 }
 
-.add-task-form fieldset {
+.add-task-form fieldset, .edit-form fieldset {
   display: grid;
   padding: 15px 25px;
 }
@@ -272,7 +272,7 @@ form button:hover {
   font-size: 1rem;
   font-weight: normal;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
   border: 1px solid black;
   border-radius: 10px;
   transition: transform 100ms ease;
@@ -319,6 +319,36 @@ form button:hover {
   grid-column: 2 / 3;
   grid-row: 3 / 4;
 }
+
+.edit-btn {
+  grid-row: 4 / 5;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  height: 30px;
+  border-radius: 5px;
+  background: var(--main-color-100);
+}
+
+.edit-btn:hover {
+  border: 1px solid pink;
+
+}
+
+dialog::backdrop {
+  position: relative;
+  background-color: salmon;
+  opacity: 40%;
+}
+
+.edit-dialog {
+  position: absolute;
+  top: 100px;
+  left: 500px;
+}
+
+
 
 .task-list-item {
   font-size: 0.9rem;

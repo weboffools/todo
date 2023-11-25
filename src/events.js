@@ -45,13 +45,13 @@ function addTaskEvent() {
 function addRemoveForm(current) {
   let form = document.querySelector('.add-task-form');
   if (form === null) {
-    current.replaceWith(DOM().taskForm({ name: 'Task Name', descr: '', project: 'Home',}));
+    current.replaceWith(DOM().taskForm({ name: 'Task Name', descr: ''}, 'add-task-form'));
     let form = DOM().getTaskForm();
     form.firstChild.focus();
     submitEvent(form);
   } else {
     form.replaceWith(DOM().addTask());
-    current.replaceWith(DOM().taskForm({ name: 'Task Name', descr: '', project: 'Home',}));
+    current.replaceWith(DOM().taskForm({ name: 'Task Name', descr: ''}, 'add-task-form'));
     form = DOM().getTaskForm();
     form.firstChild.focus();
     submitEvent(form);
@@ -77,19 +77,50 @@ function addProjectEvent() {
 function submitEvent(form) {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-
     const taskarea = DOM().getTaskAreas();
+    const name = e.target.task_name.value;
+    const description = e.target.task_descr.value;
+    const date = e.target.due_date.value;
+    const priority = e.target.priority.value;
+    const project = e.target.project.value;
+      
     const task = new Task(
-      e.target.task_name.value,
-      e.target.task_descr.value,
-      e.target.due_date.value,
-      e.target.priority.value,
-      e.target.project.value,
+      name,
+      description,
+      date,
+      priority,
+      project,
     );
-    ManageStorage().addToStore(task);
     ManageStorage().addTaskToProject(task.project, task.fullKey);
+    ManageStorage().addToStore(task);
+    
     DOM().refreshTaskArea(taskarea);
     DOM().refreshSidebar();
+  });
+}
+
+function editSubmitEvent(form, key, task) {
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const taskarea = DOM().getTaskAreas();
+    const dialog = document.querySelector('.edit-dialog');
+    const name = e.target.task_name.value;
+    const description = e.target.task_descr.value;
+    const date = e.target.due_date.value;
+    const priority = e.target.priority.value;
+    const project = e.target.project.value;
+
+    task.name = name;
+    task.description = description;
+    task.date = date;
+    task.priority = priority;
+    task.project = project;
+
+    localStorage.setItem(key, JSON.stringify(task));
+    DOM().refreshTaskArea(taskarea);
+    DOM().refreshSidebar();
+    dialog.close();
+
   });
 }
 
@@ -120,15 +151,17 @@ function checkOffTask() {
 }
 
 function editTask() {
-  const tasks = document.querySelectorAll('.task-card');
-  tasks.forEach((card) => {
-    card.addEventListener('click', (e) => {
-      let key = e.currentTarget.dataset.taskId;
-      let task = JSON.parse(localStorage.getItem(key));
-      let taskname = task.name;
-      let description = task.descr;
-      DOM().getMainElement().replaceWith(DOM().taskForm({name: taskname, descr: description,}));
-      
+  const edits = document.querySelectorAll('.edit-btn');
+  edits.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      const key = e.currentTarget.parentElement.dataset.taskId;
+      const task = JSON.parse(localStorage.getItem(key));
+      const body = document.querySelector('body');
+      const dialog = DOM().editForm(task);
+      body.appendChild(dialog);
+      const form = document.querySelector('.edit-form');
+      editSubmitEvent(form, key, task);
+      dialog.showModal();
     });
   });
   
@@ -142,6 +175,8 @@ function openProject() {
       const key = e.currentTarget.dataset.projectId;
       if (e.currentTarget.lastChild.getAttribute('class') !== 'project-task-list') {
         e.currentTarget.append(DOM().makeProjectTaskList(key));
+      } else {
+        e.currentTarget.lastChild.remove();
       }
     });
   });
